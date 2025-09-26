@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+
+@{
+    // TODO: Get shopping cart items
+    Dictionary<string, int> cart = ViewBag.Cart;
+}
+
+<div class="products">
+    @foreach (var p in Model)
+    {
+        <div class="product">
+            @* AJAX form  *@
+            <form data-ajax="true" data-ajax-update="#target"
+                  method="post" action="/Product/UpdateCart">
+                @{
+                    // TODO
+                    int quantity = 0;
+                    if (cart.ContainsKey(p.Id))
+                    {
+                        quantity = cart[p.Id];
+                        <span>✅</span>
+                    }
+                    var list = new SelectList(Enumerable.Range(1, 10), quantity);
+                }
+                @Html.DropDownList("quantity", list, "",
+                         new { onchange = "$(this.form).submit()" })
+                @Html.Hidden("productId", p.Id)
+            </form>
+            <img src="/products/@p.PhotoURL">
+            <div>@p.Name - RM @p.Price</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Demo.Models.Admin>
+@{
+    ViewBag.Title = "Home | Admin";
+}
+
+<h2>Admins</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td>@admin.Id</td>
+                <td>@admin.Email</td>
+                <td>@admin.Name</td>
+                <td>@admin.Role</td>
+                <td>
+                    <!-- Update and Delete buttons -->
+                    <button data-get="@Url.Action("UpdateAdmin", "Admin", new { id = @admin.Id })">Update</button>
+                    <button data-post="/Admin/DeleteAdmin/@admin.Id"
+                            data-confirm>
+                        Delete
+                    </button>
+                    <form data-ajax="true"
+                          data-ajax-update="#target"
+                          data-ajax-begin="$('.info').text('')"
+                          data-ajax-success="$('.info').text('Record deleted.')"
+                          style="display: inline"
+                          method="post"
+                          action="/Member/DeleteAdmin/@admin.Id">
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<button data-post="/Admin/CreateAdmin">Add Admin</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.unobtrusive-ajax/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+

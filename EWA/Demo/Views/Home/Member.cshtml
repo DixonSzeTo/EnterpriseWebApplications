@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Demo.Models.Member>
+@{
+    ViewBag.Title = "Home | Member";
+}
+
+<h2>Members</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.Id</td>
+                <td>@member.Email</td>
+                <td>@member.Name</td>
+                <td>@member.Role</td>
+                <td>
+                    <!-- Update and Delete buttons -->
+                    <button data-get="@Url.Action("UpdateMember", "Member", new { id = member.Id })">Update</button>
+                    <button data-post="/Member/DeleteMember/@member.Id"
+                            data-confirm>
+                        Delete
+                    </button>
+                    <form data-ajax="true"
+                          data-ajax-update="#target"
+                          data-ajax-begin="$('.info').text('')"
+                          data-ajax-success="$('.info').text('Record deleted.')"
+                          style="display: inline"
+                          method="post"
+                          action="/Member/DeleteMember/@member.Id">
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<button data-post="/Member/CreateMember">Add Member</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.unobtrusive-ajax/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+

@@ -1,0 +1,113 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\css\\pager.css",
+      "PackagePath": "staticwebassets\\css\\pager.css"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\images\\admin.png",
+      "PackagePath": "staticwebassets\\images\\admin.png"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\images\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\images\\loader.gif",
+      "PackagePath": "staticwebassets\\images\\loader.gif"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\images\\photo.jpg",
+      "PackagePath": "staticwebassets\\images\\photo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\js\\jquery.unobtrusive-ajax.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.unobtrusive-ajax.min.js"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\js\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\js\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\005d2ecde8624cf584af290f2bb70366.jpg",
+      "PackagePath": "staticwebassets\\photos\\005d2ecde8624cf584af290f2bb70366.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\291470cce3b746e7bf6bfffcd801c757.jpg",
+      "PackagePath": "staticwebassets\\photos\\291470cce3b746e7bf6bfffcd801c757.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\6985a1398e914963b09ffbe9ae6c29a3.jpg",
+      "PackagePath": "staticwebassets\\photos\\6985a1398e914963b09ffbe9ae6c29a3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\ac395eceb2224fa9a7a9f49aa18adb33.jpg",
+      "PackagePath": "staticwebassets\\photos\\ac395eceb2224fa9a7a9f49aa18adb33.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\c4b05d2e506e4f9486c1d0188e7ab89f.jpg",
+      "PackagePath": "staticwebassets\\photos\\c4b05d2e506e4f9486c1d0188e7ab89f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\d968168601214480bd944380018b5613.jpg",
+      "PackagePath": "staticwebassets\\photos\\d968168601214480bd944380018b5613.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\f1dae49594704fcb9349ecf16c8d904a.jpg",
+      "PackagePath": "staticwebassets\\photos\\f1dae49594704fcb9349ecf16c8d904a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\p1.png",
+      "PackagePath": "staticwebassets\\photos\\p1.png"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\p2.png",
+      "PackagePath": "staticwebassets\\photos\\p2.png"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\p3.jpg",
+      "PackagePath": "staticwebassets\\photos\\p3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\p4.png",
+      "PackagePath": "staticwebassets\\photos\\p4.png"
+    },
+    {
+      "Id": "C:\\Users\\youch\\Downloads\\EWA\\Assignment\\EWA\\Demo\\wwwroot\\photos\\shoelogo.jpg",
+      "PackagePath": "staticwebassets\\photos\\shoelogo.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Demo.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Demo.props",
+      "PackagePath": "build\\Demo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Demo.props",
+      "PackagePath": "buildMultiTargeting\\Demo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Demo.props",
+      "PackagePath": "buildTransitive\\Demo.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
