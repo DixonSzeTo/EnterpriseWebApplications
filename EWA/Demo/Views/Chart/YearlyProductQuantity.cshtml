@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Chart | Yearly Product Quantity Sales Report";
+}
+
+<div id="yearlyProductChart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(initYearlyProductQuantityChart);
+
+        let yearlyProductDt, yearlyProductOpt, yearlyProductCht;
+
+        function initYearlyProductQuantityChart() {
+            yearlyProductDt = new google.visualization.DataTable();
+            yearlyProductDt.addColumn('string', 'Year');
+            yearlyProductDt.addColumn('number', 'Total Quantity');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            yearlyProductOpt = {
+                title: 'Yearly Product Quantity Sales Report',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Year', titleTextStyle: style },
+                vAxis: { title: 'Total Quantity', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            yearlyProductCht = new google.visualization.ColumnChart(document.getElementById('yearlyProductChart'));
+
+            fetch('/Chart/Data4')
+                .then(response => response.json())
+                .then(data => {
+                    yearlyProductDt.removeRows(0, yearlyProductDt.getNumberOfRows());
+                    yearlyProductDt.addRows(data); 
+                    yearlyProductCht.draw(yearlyProductDt, yearlyProductOpt); 
+                })
+                .catch(error => console.error('Error fetching yearly product quantity data:', error));
+        }
+    </script>
+}

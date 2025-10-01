@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Chart | Yearly Sales Report";
+}
+
+<div id="chart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(init);
+
+        let dt, opt, cht;
+
+        function init() {
+            dt = new google.visualization.DataTable();
+            dt.addColumn('string', 'Year');
+            dt.addColumn('number', 'Sales');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            opt = {
+                title: 'Overall Sales By Year',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Year', titleTextStyle: style },
+                vAxis: { title: 'Sales (RM)', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            cht = new google.visualization.ColumnChart($('#chart')[0]);
+
+            loadChartData();
+        }
+
+        function loadChartData() {
+            const url = 'Data1';
+
+            $.getJSON(url, data => {
+                dt.removeRows(0, dt.getNumberOfRows());
+                dt.addRows(data);
+
+                new google.visualization
+                    .NumberFormat({ pattern: 'RM #,##0.00' })
+                    .format(dt, 1);
+
+                cht.draw(dt, opt);
+            });
+        }
+    </script>
+}

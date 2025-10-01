@@ -1,0 +1,205 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Demo
+build_property.RootNamespace = Demo
+build_property.ProjectDir = C:\Users\Dixon\OneDrive\Pictures\Documents\GitHub\EnterpriseWebApplications\EWA\Demo\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Dixon\OneDrive\Pictures\Documents\GitHub\EnterpriseWebApplications\EWA\Demo
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/UpdatePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxVcGRhdGVQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Account/UpdateProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxVcGRhdGVQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Admin/CreateAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Admin/UpdateAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBkYXRlQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/AverageOrderValuePerYear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcQXZlcmFnZU9yZGVyVmFsdWVQZXJZZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/DailyProductQuantity.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcRGFpbHlQcm9kdWN0UXVhbnRpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/DailySales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcRGFpbHlTYWxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/MemberReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcTWVtYmVyUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/MonthlyProductQuantity.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcTW9udGhseVByb2R1Y3RRdWFudGl0eS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/MonthlySales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcTW9udGhseVNhbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/ProductReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcUHJvZHVjdFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/Ranking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcUmFua2luZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/YearlyProductQuantity.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcWWVhcmx5UHJvZHVjdFF1YW50aXR5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Chart/YearlySales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcWWVhcmx5U2FsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGF0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Map.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Member.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW1iZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/Order.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Home/ProductCRUD.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0Q1JVRC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Member/CreateMember.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXENyZWF0ZU1lbWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Member/UpdateMember.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXFVwZGF0ZU1lbWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/ProductCRUD/CreateProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdENSVURcQ3JlYXRlUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/ProductCRUD/UpdateProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdENSVURcVXBkYXRlUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/Order.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/OrderDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxPcmRlckRldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/Run.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxSdW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/ShoppingCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxTaG9wcGluZ0NhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxTdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/_Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxfSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/_Run.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxfUnVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Product/_ShoppingCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxfU2hvcHBpbmdDYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Shared/_CheckBoxList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DaGVja0JveExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/Shared/_RadioButtonList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SYWRpb0J1dHRvbkxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dixon/OneDrive/Pictures/Documents/GitHub/EnterpriseWebApplications/EWA/Demo/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

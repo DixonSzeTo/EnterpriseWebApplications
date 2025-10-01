@@ -1,0 +1,3 @@
+# Ignore sensitive configs
+appsettings.json
+appsettings.Development.json

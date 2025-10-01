@@ -1,0 +1,200 @@
+﻿@inject Helper hp
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="/images/logo.jpeg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/css/pager.css">
+    <link rel="stylesheet" href="/css/app.css" asp-append-version="true">
+
+    @RenderSection("head", false)
+    <style>
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            background-color: #0B660B;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+            .chat-button:hover {
+                background-color: #094C09;
+            }
+
+        .mainnav {
+            position: relative;
+
+        }
+
+            .mainnav ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+            }
+
+            .mainnav > ul > li {
+                position: relative;
+                display: inline-block; 
+            }
+
+        .subnav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white; 
+            border: 1px solid #ccc; 
+            z-index: 1000;
+        }
+
+        .mainnav > ul > li:hover .subnav {
+            display: block; 
+        }
+
+        .mainnav > ul >li>a{
+            margin-left:-50px;
+            vertical-align:-webkit-baseline-middle;
+            line-height:1.5;
+
+        }
+
+        .subnav li {
+            display: block;
+            margin-left: -50px;
+
+        }
+
+            .subnav li a {
+                display: block; 
+                padding: 10px; 
+                text-decoration: none;
+                color: black;
+                background-color: lightgray;
+            }
+
+                .subnav li a:hover {
+                    background-color: #f0f0f0;
+                }
+
+    </style>
+</head>
+<body>
+    <div class="info">@Html.Raw(TempData["Info"])</div>
+
+    <header>
+        <h1><a href="/">NICEY FOOT WEAR</a></h1>
+
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <div>
+                @User.Identity.Name | 
+                @if (User.IsInRole("Admin"))  { <text>Admin</text>  }
+                @if (User.IsInRole("Member")) { <text>Member</text> }
+            </div>
+        }
+
+        @if (User.IsInRole("Member"))
+        {
+            var photoURL = hp.GetMemberPhotoURL();
+
+            if (photoURL != null)
+            {
+                <img src="/photos/@photoURL">
+            }
+        }
+    </header>
+
+    <nav>
+        <a href="/">Index</a>
+        <a href="/Product/Index">Product</a>
+        <a href="/Product/ShoppingCart">Shopping Cart</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="/Home/Member">Account Maintenance</a>
+            <a href="/Home/ProductCRUD">Product Maintenance</a>
+            <a href="/Home/Order">Order Maintenance</a>
+
+            <nav class="mainnav">
+                <ul>
+                    <li>
+                        <a href="#">Data Report</a>
+                        <ul class="subnav">
+                            <li><a href="/Chart/YearlySales">Yearly Sales Report</a></li>
+                            <li><a href="/Chart/MonthlySales">Monthly Sales Report</a></li>
+                            <li><a href="/Chart/DailySales">Sales Report for Active Sales Days</a></li>
+                            <li><a href="/Chart/YearlyProductQuantity">Yearly Product Quantity Sales</a></li>
+                            <li><a href="/Chart/MonthlyProductQuantity">Monthly Product Quantity Sales</a></li>
+                            <li><a href="/Chart/DailyProductQuantity">Product Quantity Sales Report for Active Sales Days</a></li>
+                            <li><a href="/Chart/ProductReport">Product Report</a></li>
+                            <li><a href="/Chart/MemberReport">Member Report | Account Status</a></li>
+                            <li><a href="/Chart/AverageOrderValuePerYear">Average Order Value Per Year</a></li>
+                            <li><a href="/Chart/Ranking">Product Ranking for Last 30 Days</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+        }
+
+        @if (User.IsInRole("Member"))
+        {
+            <a href="/Product/Order">Order</a>
+
+        }
+
+
+        <div></div>
+        
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="/Account/Logout">Logout</a>
+            <a href="/Account/UpdatePassword">Update Password</a>
+        }
+        else
+        {
+            <a href="/Account/Login">Login</a>
+            <a href="/Account/Register">Register</a>
+            <a href="/Account/ResetPassword">Reset Password</a>
+        }
+        @if (User.IsInRole("Member"))
+        {
+            <a href="/Account/UpdateProfile">Update Profile</a>
+        }
+    </nav>
+
+    <main>
+        <h1>@ViewBag.Title</h1>
+        @RenderBody()
+    </main> 
+
+    <footer>
+        <b>NICEY FOOTWEAR MALAYSIA</b> &middot;
+        Copyrighted &copy; @DateTime.Today.Year
+    </footer>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/js/app.js" asp-append-version="true"></script>
+
+    @RenderSection("foot", false)
+    <button class="chat-button" onclick="window.location.href='@Url.Action("Chat", "Home")'">
+        💬
+    </button>
+</body>
+</html>

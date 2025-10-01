@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Demo.Models.Member>
+@{
+    ViewBag.Title = "Maintenance | Member";
+    string name = "";
+}
+
+@section head {
+    <style>
+        mark {
+            background: yellow;
+        }
+    </style>
+}
+<div class="nav-container">
+    <a href="/Home/Member" class="nav-link">Member</a>
+    <a href="/Home/Admin" class="nav-link">Admin</a>
+</div>
+
+<h2>Members</h2>
+<form data-ajax="true"
+      data-ajax-loading="#loader"
+      data-ajax-success="success"
+      autocomplete="off">
+    <label><b>Search Member:</b></label>
+    <input id="name" name="name" type="search" autofocus>
+    <img src="/images/loader.gif" id="loader" style="display: none">
+</form>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="memberList">
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.Id</td>
+                <td>@member.Email</td>
+                <td>@member.Name</td>
+                <td>@member.Address</td>
+                <td>@member.Role</td>
+                <td>
+                    <!-- Update and Delete buttons -->
+                    <button data-get="@Url.Action("UpdateMember", "Member", new { id = member.Id })">Update</button>
+
+                    <form data-ajax="true"
+                          data-ajax-update="#target"
+                          data-ajax-begin="$('.info').text('')"
+                          data-ajax-success="$('.info').text('Member Deleted.')"
+                          style="display: inline"
+                          method="post">
+                        <button data-post="/Member/DeleteMember/@member.Id" data-confirm>Delete</button>
+                    </form>
+
+                    <!-- Block/Unblock functionality -->
+
+                     @if (member.IsBlocked)
+                    {
+                        <form data-ajax="true"
+                              data-ajax-begin="$('.info').text('')"
+                              style="display: inline"
+                              method="post">
+                            <button data-post="/Member/UnblockMember/@member.Id"
+                                    data-confirm>
+                                Unblock
+                            </button>
+                        </form>
+
+                    }
+                    else
+                    {
+                        <form data-ajax="true"
+                              data-ajax-begin="$('.info').text('')"
+                              style="display: inline"
+                              method="post">
+                            <button data-post="/Member/BlockMember/@member.Id"
+                                    data-confirm>
+                                Block
+                            </button>
+                        </form>
+
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<br />
+
+<a href="/Member/CreateMember" style="    
+       display: inline-block;
+    padding: 10px 20px;
+    background-color: #0B660B;
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; ">
+    Create Member
+</a>
+
+
+@section foot {
+
+    <script>
+        function success(response) {
+            $('#memberList').html($(response).find('#memberList').html());
+
+            const name = $('#name').val().trim();
+            if (!name) return;
+
+            const re = new RegExp(escapeRegExp(name), 'gi');
+            $('td:nth-child(3)').each((i, el) => {
+                const h = $(el).html().replace(re, '<mark>$&</mark>');
+                $(el).html(h);
+            });
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        let timer = null;
+        $('#name').on('input', e => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                $(e.target.form).submit();
+            }, 500);
+        });
+    </script>
+
+}
+
+

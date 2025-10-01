@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Chart | Monthly Sales Report";
+}
+
+<form id="yearForm" method="get" action="/Chart/Data2">
+    <label for="year">Select Year:</label>
+    <select id="year" name="year"></select>
+    <button type="submit">Get Sales Data</button>
+</form>
+
+<div id="chart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(init);
+
+        let dt, opt, cht;
+
+        function init() {
+            dt = new google.visualization.DataTable();
+            dt.addColumn('string', 'Month');
+            dt.addColumn('number', 'Sales');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            opt = {
+                title: 'Overall Sales By Month',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Year-Month', titleTextStyle: style },
+                vAxis: { title: 'Sales (RM)', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            cht = new google.visualization.ColumnChart(document.getElementById('chart'));
+
+            fetch('/Chart/YearRange')
+                .then(response => response.json())
+                .then(data => {
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '';
+                    if (data.length > 0) {
+                        const currentYear = new Date().getFullYear();
+
+                        data.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+
+                            if (year == currentYear) {
+                                option.selected = true;
+                            }
+
+                            yearSelect.appendChild(option);
+                        });
+
+                        fetch(`/Chart/Data2?year=${currentYear}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                dt.removeRows(0, dt.getNumberOfRows()); 
+                                dt.addRows(data); 
+
+                                new google.visualization
+                                    .NumberFormat({ pattern: 'RM #,##0.00' })
+                                    .format(dt, 1);
+
+                                cht.draw(dt, opt); 
+                            })
+                            .catch(error => console.error('Error fetching sales data:', error));
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No available years';
+                        yearSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching years:', error));
+
+            document.getElementById('yearForm').onsubmit = function (event) {
+                event.preventDefault(); 
+
+                const year = document.getElementById('year').value;
+                if (year) {
+                    fetch(`/Chart/Data2?year=${year}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            dt.removeRows(0, dt.getNumberOfRows());
+                            dt.addRows(data); 
+
+                            new google.visualization
+                                .NumberFormat({ pattern: 'RM #,##0.00' })
+                                .format(dt, 1);
+
+                            cht.draw(dt, opt); 
+                        })
+                        .catch(error => console.error('Error fetching sales data:', error));
+                } else {
+                    alert('Please select a valid year.');
+                }
+            };
+        }
+    </script>
+}

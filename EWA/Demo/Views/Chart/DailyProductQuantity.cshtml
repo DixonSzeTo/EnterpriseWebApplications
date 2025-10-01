@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Chart | Product Quantity Sales Report for Active Sales Days ";
+}
+
+<form id="dailyProductForm" method="get" action="/Chart/DailyProductQuantity">
+    <label for="year">Select Year:</label>
+    <select id="year" name="year"></select>
+    <button type="submit">Get Daily Product Quantity Data</button>
+</form>
+
+<div id="dailyProductChart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(initDailyProductQuantityChart);
+
+        let dailyProductDt, dailyProductOpt, dailyProductCht;
+
+        function initDailyProductQuantityChart() {
+            dailyProductDt = new google.visualization.DataTable();
+            dailyProductDt.addColumn('string', 'Date');
+            dailyProductDt.addColumn('number', 'Total Quantity');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            dailyProductOpt = {
+                title: 'Product Quantity Sales Report for Active Sales Days',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Date', titleTextStyle: style },
+                vAxis: { title: 'Total Quantity', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson'],
+                curveType: 'function'
+            };
+
+            dailyProductCht = new google.visualization.LineChart(document.getElementById('dailyProductChart'));
+
+            fetch('/Chart/YearRange')
+                .then(response => response.json())
+                .then(data => {
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '';
+                    if (data.length > 0) {
+                        const currentYear = new Date().getFullYear();
+
+                        data.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+
+                            if (year == currentYear) {
+                                option.selected = true;
+                            }
+
+                            yearSelect.appendChild(option);
+                        });
+
+                        fetch(`/Chart/Data6?year=${currentYear}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                dailyProductDt.removeRows(0, dailyProductDt.getNumberOfRows());
+
+                                if (data.length === 0) {
+                                    alert('No sales data available for the current year.');
+                                    return;
+                                }
+
+                                dailyProductDt.addRows(data);
+                                dailyProductCht.draw(dailyProductDt, dailyProductOpt);
+                            })
+                            .catch(error => console.error('Error fetching daily product quantity data:', error));
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No available years';
+                        yearSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching years:', error));
+
+            document.getElementById('dailyProductForm').onsubmit = function (event) {
+                event.preventDefault();
+
+                const year = document.getElementById('year').value;
+                if (year) {
+                    fetch(`/Chart/Data6?year=${year}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            dailyProductDt.removeRows(0, dailyProductDt.getNumberOfRows());
+
+                            if (data.length === 0) {
+                                alert('No sales data available for the selected year.');
+                                return; 
+                            }
+
+                            dailyProductDt.addRows(data);
+                            dailyProductCht.draw(dailyProductDt, dailyProductOpt);
+                        })
+                        .catch(error => console.error('Error fetching daily product quantity data:', error));
+                } else {
+                    alert('Please select a valid year.');
+                }
+            };
+        }
+    </script>
+}

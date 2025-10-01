@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Product Report | Quantity Sales";
+}
+
+<h2>Product Sales Quantity Report</h2>
+
+<form id="yearlyProductForm" method="get" action="/Chart/ProductReport">
+    <label for="year">Select Year:</label>
+    <select id="year" name="year"></select>
+    <button type="submit">Get Daily Product Quantity Data</button>
+</form>
+
+<div id="productReportChart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(initProductReportChart);
+
+        let productReportDt, productReportOpt, productReportCht;
+
+        function initProductReportChart() {
+            productReportDt = new google.visualization.DataTable();
+            productReportDt.addColumn('string', 'Product ID'); 
+            productReportDt.addColumn('number', 'Total Quantity');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            productReportOpt = {
+                title: 'Product Sales Quantity Report',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Products', titleTextStyle: style },
+                vAxis: { title: 'Total Quantity', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            productReportCht = new google.visualization.ColumnChart(document.getElementById('productReportChart'));
+
+            fetch('/Chart/YearRange')
+                .then(response => response.json())
+                .then(data => {
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '';
+                    if (data.length > 0) {
+                        const currentYear = new Date().getFullYear();
+                        data.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            yearSelect.appendChild(option);
+
+                            if (year == currentYear) {
+                                option.selected = true;
+                            }
+                        });
+
+                        fetchData(currentYear); 
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No available years';
+                        yearSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching years:', error));
+
+            document.getElementById('yearlyProductForm').onsubmit = function (event) {
+                event.preventDefault();
+
+                const year = document.getElementById('year').value;
+                if (year) {
+                    fetchData(year);
+                } else {
+                    alert('Please select a valid year.');
+                }
+            };
+        }
+
+        function fetchData(year) {
+            fetch(`/Chart/Data7?year=${year}`)
+                .then(response => response.json())
+                .then(data => {
+                    productReportDt.removeRows(0, productReportDt.getNumberOfRows());
+                    productReportDt.addRows(data);
+
+                    productReportCht.draw(productReportDt, productReportOpt);
+                })
+                .catch(error => console.error('Error fetching product quantity data:', error));
+        }
+    </script>
+}

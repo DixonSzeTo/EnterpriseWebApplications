@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Product>
+
+@{
+    Dictionary<string, int> cart = ViewBag.Cart;
+
+}
+
+
+<button type="button" class="button-link" onclick="window.location.href='/Product/Index'">Top Selling Products</button>
+<button type="button" class="button-link" onclick="window.location.href='/Product/Run'">Running Shoes</button>
+<br />
+<br />
+
+
+<div  class="products">
+    @foreach (var p in Model.Where(p => p.Category == "Run").OrderByDescending(p => p.Stock))
+    {
+        <div class="product @(p.Stock == 0 ? "unavailable" : "")">
+            @* TODO: AJAX form ✅ *@
+            <form data-ajax="true" data-ajax-update="#run"
+                  method="post" action="/Product/UpdateCart">
+                @{
+                    int quantity = 0;
+                    if (cart.ContainsKey(p.Id))
+                    {
+                        quantity = cart[p.Id];
+                        <span>✅</span>
+                    }
+                    <b>Quantity: </b>
+                    <input type="number" name="quantity" min="0" max="@p.Stock" value="@quantity"
+                           onchange="$(this.form).submit()" @(p.Stock == 0 ? "disabled" : "") />
+
+                }
+
+                @Html.Hidden("productId", p.Id)
+                @Html.Hidden("stock", p.Stock)
+            </form>
+            <img src="/products/@p.PhotoURL">
+            <div class="details">
+                <div class="name">@p.Name </div>
+                <div>RM @p.Price | Stock: @p.Stock</div>
+                @if (p.Stock == 0)
+                {
+                    <span class="unavailable-label">Out of Stock</span>
+                }
+            </div>
+        </div>
+    }
+
+</div>

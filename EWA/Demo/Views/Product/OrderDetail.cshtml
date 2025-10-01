@@ -1,0 +1,86 @@
+﻿@model Order
+
+@{
+    ViewBag.Title = "Product | Order Detail";
+
+}
+
+@section head {
+    <style>
+        td img {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        td:nth-child(3),
+        td:nth-child(4),
+        td:nth-child(5) {
+            text-align: right;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+}
+
+<form class="form">
+    <label>Order Id</label>
+    <span>@Model.Id</span> 
+    <br>
+
+    <label>Date</label>
+    <span>@Model.Date.ToString("yyyy-MM-dd")</span>
+    <br>
+</form>
+
+<p>
+    <button data-get="/Product/Order">Back</button>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+    </tr>
+
+    @{
+        int count = 0;
+        decimal total = 0.00m;
+    }
+
+    @foreach (OrderLine line in Model.OrderLines)
+    {
+        // TODO: Calculate subtotal, count and total
+        decimal subtotal = line.Price * line.Quantity;
+        count += line.Quantity;
+        total += subtotal;
+
+        <tr>
+            <td>
+                <img src="/products/@line.Product.PhotoURL">
+                @line.Product.Id
+            </td>
+            <td>
+                @line.Product.Name
+            </td>
+            <td>@line.Price</td>
+            <td>@line.Quantity</td>
+            <td>@subtotal</td>
+        </tr>
+    }
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="bold">@count</td>
+        <td class="bold">@total</td>
+    </tr>
+</table>

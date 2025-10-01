@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Product | Success";
+    var orderId = TempData["OrderId"];
+}
+
+<style>
+    .success-message {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        border: 1px solid #28a745;
+        border-radius: 5px;
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .success-button {
+        margin-top: 20px;
+    }
+
+        .success-button a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #28a745; 
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+            .success-button a:hover {
+                background-color: #218838; 
+            }
+</style>
+
+<body>
+    <div class="container">
+        <div class="success-message">
+            <h2>Checkout Success!</h2>
+            <p>Thank you for your order!</p>
+            @if (orderId == null)
+            {
+                <p>View <a href="/Product/Order">your orders</a>.</p>
+            }
+            else
+            {
+                <p>View <a href="/Product/OrderDetail/@orderId">order detail</a> (#@orderId).</p>
+            }
+            <div class="success-button">
+                <a href="/Product">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,28 @@
+﻿@model UpdateAdminVM
+
+@{
+    ViewBag.Title = "Admin | Update Admin";
+}
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="Id"></label>
+    <b>@Model.Id</b>
+    <br>
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" autofocus>
+    <span asp-validation-for="Email"></span>
+
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name">
+    <span asp-validation-for="Name"></span>
+
+
+    <section>
+        <button>Update</button>
+        <button type="submit" name="action" value="back">Back</button>
+    </section>
+</form>

@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Chart | Monthly Product Quantity Sales Report";
+}
+
+<form id="monthlyProductForm" method="get" action="/Chart/MonthlyProductQuantity">
+    <label for="year">Select Year:</label>
+    <select id="year" name="year"></select>
+    <button type="submit">Get Product Quantity Data</button>
+</form>
+
+<div id="monthlyProductChart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(initMonthlyProductQuantityChart);
+
+        let monthlyProductDt, monthlyProductOpt, monthlyProductCht;
+
+        function initMonthlyProductQuantityChart() {
+            monthlyProductDt = new google.visualization.DataTable();
+            monthlyProductDt.addColumn('string', 'Month');
+            monthlyProductDt.addColumn('number', 'Total Quantity');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            monthlyProductOpt = {
+                title: 'Monthly Product Quantity Sales Report',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: 'none',
+                hAxis: { title: 'Months', titleTextStyle: style },
+                vAxis: { title: 'Total Quantity', titleTextStyle: style },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            monthlyProductCht = new google.visualization.ColumnChart(document.getElementById('monthlyProductChart'));
+
+            fetch('/Chart/YearRange')
+                .then(response => response.json())
+                .then(data => {
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '';
+                    if (data.length > 0) {
+                        const currentYear = new Date().getFullYear();
+
+                        data.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+
+                            if (year == currentYear) {
+                                option.selected = true;
+                            }
+
+                            yearSelect.appendChild(option);
+                        });
+
+                        fetch(`/Chart/Data5?year=${currentYear}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                monthlyProductDt.removeRows(0, monthlyProductDt.getNumberOfRows());
+                                monthlyProductDt.addRows(data);
+
+                                monthlyProductCht.draw(monthlyProductDt, monthlyProductOpt);
+                            })
+                            .catch(error => console.error('Error fetching monthly product quantity data:', error));
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No available years';
+                        yearSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching years:', error));
+
+            document.getElementById('monthlyProductForm').onsubmit = function (event) {
+                event.preventDefault();
+
+                const year = document.getElementById('year').value;
+                if (year) {
+                    fetch(`/Chart/Data5?year=${year}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            monthlyProductDt.removeRows(0, monthlyProductDt.getNumberOfRows());
+                            monthlyProductDt.addRows(data);
+
+                            monthlyProductCht.draw(monthlyProductDt, monthlyProductOpt);
+                        })
+                        .catch(error => console.error('Error fetching monthly product quantity data:', error));
+                } else {
+                    alert('Please select a valid year.');
+                }
+            };
+        }
+    </script>
+}

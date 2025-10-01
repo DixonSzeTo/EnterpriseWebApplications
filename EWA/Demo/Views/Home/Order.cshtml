@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Demo.Models.Order>
+
+@{
+    ViewBag.Title = "Maintenance | Order";
+}
+
+@section head {
+    <style>
+        td {
+            text-align: center;
+        }
+
+        .popup {
+            display: none;
+        }
+
+            .popup > div {
+                text-align: left;
+            }
+
+        td img {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .update-section {
+            margin-left: 70%;
+            width: 20%;
+            position: fixed;
+            border: 2px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+
+        }
+
+        .inline-tables {
+            display: flex;
+        }
+
+        .order-table {
+            width: 70%;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+    </style>
+}
+<div class="filter-section">
+    <h4>Filter Orders by Status: </h4>
+    <form method="get" action="/Home/Order">
+        <select name="OrderStatus" style="width: 200px;">
+            <option value="">Select Status</option>
+            @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="inline-tables">
+
+    <table class="table order-table">
+        <tr>
+            <th>Order Id</th>
+            <th>Member Id</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Count</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (Order order in Model)
+        {
+            var backgroundColor = order.Status == OrderStatus.Cancelled
+            ? "background-color: #ffcccb;"
+            : order.Status == OrderStatus.Delivered
+            ? "background-color: #d4edda;"
+            : "";
+            <tr style="@backgroundColor">
+                <td>@order.Id</td>
+                <td>@order.MemberId</td>
+                <td>@order.Date.ToString("yyyy-MM-dd")</td>
+                <td>@order.Status</td>
+                <td>@(order.OrderLines?.Sum(ol => ol.Quantity) ?? 0)</td>
+                <td>@(order.OrderLines?.Sum(ol => ol.Price * ol.Quantity) ?? 0)</td>
+
+                <td>
+                    <button type="button" class="update-button"
+                            onclick="updateOrderForm('@order.Id', '@order.Status')">
+                        Update Status
+                    </button>
+                    <div class="popup">
+                        @if (order.OrderLines != null && order.OrderLines.Any())
+                        {
+                            foreach (var orderLine in order.OrderLines)
+                            {
+                                <div><img src="/products/@orderLine.Product!.PhotoURL"> @orderLine.Product!.Id - @orderLine.Product?.Name - Quantity: @orderLine.Quantity</div>
+                            }
+                        }
+                        else
+                        {
+                            <div>No products available</div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="update-section">
+        <h4>Update Order Status</h4>
+        <form method="post" action="/OrderM/SaveOrderStatus">
+            <table>
+                <tr>
+                    <td style="text-align: left; padding-right: 10px;">Order Id:</td>
+                    <td><input type="text" id="update-order-id" name="OrderId" readonly style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-right: 10px;">Status:</td>
+                    <td>
+                        <select id="update-order-status" name="Status" style="width: 100%;">
+                            @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; padding-top: 10px;">
+                        <button type="submit" style="padding: 5px 15px;">Save</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+@section foot {
+    <script>
+
+
+        function updateOrderForm(orderId, orderStatus) {
+            document.getElementById('update-order-id').value = orderId;
+            document.getElementById('update-order-status').value = orderStatus;
+
+            document.querySelector('.update-section').style.display = 'block';
+        }
+
+
+    </script>
+}

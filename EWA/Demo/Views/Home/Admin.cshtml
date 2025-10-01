@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Demo.Models.Admin>
+@{
+    ViewBag.Title = "Maintenance | Admin";
+    string name = "";
+
+}
+@section head {
+    <style>
+        mark {
+            background: yellow;
+        }
+    </style>
+}
+<div class="nav-container">
+    <a href="/Home/Member" class="nav-link">Member</a>
+    <a href="/Home/Admin" class="nav-link">Admin</a>
+</div>
+
+
+<h2>Admins</h2>
+<form data-ajax="true"
+      data-ajax-loading="#loader"
+      data-ajax-success="success"
+      autocomplete="off">
+    <label><b>Search Admin:</b></label>
+    <input id="name" name="name" type="search" autofocus>
+    <img src="/images/loader.gif" id="loader" style="display: none">
+</form>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="adminList">
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td>@admin.Id</td>
+                <td>@admin.Email</td>
+                <td>@admin.Name</td>
+                <td>@admin.Role</td>
+                <td>
+                    <!-- Update and Delete buttons -->
+                    <button data-get="@Url.Action("UpdateAdmin", "Admin", new { id = @admin.Id })">Update</button>
+
+                    <form data-ajax="true"
+                          data-ajax-begin="$('.info').text('')"
+                          style="display: inline"
+                          method="post"
+                    >
+                        <button data-post="/Admin/DeleteAdmin/@admin.Id"
+                                data-confirm>
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a href="/Admin/CreateAdmin" style="
+       display: inline-block;
+    padding: 10px 20px;
+    background-color: #0B660B;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px; ">
+
+    Create Admin
+</a>
+@section foot {
+
+    <script>
+        function success(response) {
+            $('#adminList').html($(response).find('#adminList').html());
+
+            const name = $('#name').val().trim();
+            if (!name) return;
+
+            const re = new RegExp(escapeRegExp(name), 'gi');
+            $('td:nth-child(3)').each((i, el) => {
+                const h = $(el).html().replace(re, '<mark>$&</mark>');
+                $(el).html(h);
+            });
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        let timer = null;
+        $('#name').on('input', e => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                $(e.target.form).submit();
+            }, 500);
+        });
+    </script>
+
+}

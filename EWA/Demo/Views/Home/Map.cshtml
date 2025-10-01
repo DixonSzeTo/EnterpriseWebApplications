@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Home | Map";
+}
+
+@section head {
+    <style>
+        main {
+            display: grid;
+            grid: auto auto 1fr / auto;
+        }
+
+        #type {
+            text-transform: capitalize;
+            margin-left: 10px;
+        }
+
+        #map {
+            margin-top: 5px;
+            border: 1px solid #333;
+            height: 500px;
+            width: 100%;
+        }
+
+        #info {
+            font: 16px 'Roboto';
+            text-align: center;
+        }
+
+            #info img {
+                border: 1px solid #333;
+                width: 300px;
+            }
+
+        #zoom-controls {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: #0B660B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0A550A;
+            }
+    </style>
+}
+
+<div>
+    <button id="store-kl">Store KL</button>
+    <button id="store-pg">Store PG</button>
+
+    <select id="type">
+        <option value="roadmap">Roadmap</option>
+        <option value="satellite">Satellite</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="terrain">Terrain</option>
+    </select>
+
+    <div id="zoom-controls">
+        <button id="zoom-in">Zoom In</button>
+        <button id="zoom-out">Zoom Out</button>
+    </div>
+</div>
+
+<div id="map"></div>
+
+@section foot {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz2uoI-By20D_wuU0fPHtQVXl_W1XhxN8"></script>
+    <script>
+        const gm = google.maps;
+        const klLocation = { lat: 3.215, lng: 101.728 };
+        const pgLocation = { lat: 5.453, lng: 100.285 };
+
+        const map = new gm.Map(document.getElementById('map'), {
+            center: klLocation,
+            zoom: 14,
+        });
+
+        const klMarker = new gm.Marker({
+            position: klLocation,
+            map,
+            icon: '/images/m/store.png',
+            title: 'TAR UMT KL',
+        });
+
+        const pgMarker = new gm.Marker({
+            position: pgLocation,
+            map,
+            icon: '/images/m/store.png',
+            title: 'TAR UMT PG',
+        });
+
+        const info = new gm.InfoWindow();
+
+        klMarker.addListener('click', () => {
+            info.setContent(`
+                                                <img src="/images/tarumt.png" style="width: 100%; max-width: 300px; border: 1px solid #333; margin-bottom: 10px;">
+
+                        <div style="text-align: center;">
+                            TAR UMT KL - Learn more: <a href="https://www.tarc.edu.my" target="_blank">here</a>.
+                        </div>
+                    `);
+            info.open(map, klMarker);
+            klMarker.setAnimation(gm.Animation.BOUNCE);
+            setTimeout(() => klMarker.setAnimation(null), 1400);
+        });
+
+        pgMarker.addListener('click', () => {
+            info.setContent(`
+                                                <img src="/images/tarumt.png" style="width: 100%; max-width: 300px; border: 1px solid #333; margin-bottom: 10px;">
+
+                        <div style="text-align: center;">
+                            TAR UMT Penang - Learn more: <a href="https://www.tarc.edu.my" target="_blank">here</a>.
+                        </div>
+                    `);
+            info.open(map, pgMarker);
+            pgMarker.setAnimation(gm.Animation.BOUNCE);
+            setTimeout(() => pgMarker.setAnimation(null), 1400);
+        });
+
+        document.getElementById('store-kl').addEventListener('click', () => {
+            map.setZoom(18);
+            map.panTo(klLocation);
+        });
+
+        document.getElementById('store-pg').addEventListener('click', () => {
+            map.setZoom(18);
+            map.panTo(pgLocation);
+        });
+
+        document.getElementById('type').addEventListener('change', (e) => {
+            map.setMapTypeId(e.target.value);
+        });
+
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            map.setZoom(map.getZoom() + 1);
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            map.setZoom(map.getZoom() - 1);
+        });
+
+        const bounds = new gm.LatLngBounds();
+        bounds.extend(klLocation);
+        bounds.extend(pgLocation);
+        map.fitBounds(bounds);
+    </script>
+}

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewBag.Title = "Product | Order";
+}
+
+@section head {
+    <style>
+        td:nth-child(3),
+        td:nth-child(4) {
+            text-align: right;
+        }
+    </style>
+}
+
+<table class="table">
+    <tr>
+        <th>Order Id</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Count</th>
+        <th>Total</th>
+        <th>Action</th>
+
+    </tr>
+    @foreach (Order order in Model)
+    {
+        var backgroundColor = order.Status == OrderStatus.Cancelled
+        ? "background-color: #ffcccb;"
+        : order.Status == OrderStatus.Delivered
+        ? "background-color: #d4edda;" 
+        : "";
+
+        <tr style="@backgroundColor">
+            <td>@order.Id</td>
+            <td>@order.Date.ToString("yyyy-MM-dd")</td>
+            <td>@order.Status</td>
+
+            <td>@order.OrderLines.Sum(ol => ol.Quantity)</td>
+            <td>@order.OrderLines.Sum(ol => ol.Price * ol.Quantity)</td>
+
+            <td>
+                <form data-ajax="true"
+                      data-ajax-begin="$('.info').text('')"
+                      style="display: inline"
+                      method="post">
+                    <button data-get="/Product/OrderDetail/@order.Id">
+                        Details
+                    </button>
+                </form>
+
+                <form method="post" action="/Product/OrderCancel" style="display: inline" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                    <input type="hidden" name="orderId" value="@order.Id" />
+
+                    @if (order.Status != OrderStatus.Cancelled && order.Status != OrderStatus.Delivered)
+                    {
+                        <button type="submit">
+                            Cancel Order
+                        </button>
+                    }
+                    else if (order.Status == OrderStatus.Cancelled)
+                    {
+                        <button type="button" disabled>
+                            Cancelled
+                        </button>
+                    }
+                    else if (order.Status == OrderStatus.Delivered)
+                    {
+                        <button type="button" disabled>
+                            Delivered
+                        </button>
+                    }
+                </form>
+
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CartItem>
+
+<table class="table">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+    </tr>
+
+    @{
+        int count = 0;
+        decimal total = 0.00m;
+    }
+
+    @foreach (CartItem item in Model)
+    {
+        // Calculate subtotal, count and total
+        decimal subtotal = item.Product.Price * item.Quantity;
+        count += item.Quantity;
+        total += subtotal;
+
+        var list = new SelectList(Enumerable.Range(1, 10), item.Quantity);
+
+        <tr>
+            <td>
+                <img src="/products/@item.Product.PhotoURL">
+                @item.Product.Id - @item.Product.Name
+            </td>
+            <td>@item.Product.Price</td>
+            <td>
+                @* AJAX form *@
+                <form method="post" action="/Product/UpdateCart"
+                      data-ajax="true" data-ajax-update="#target">
+                    @Html.DropDownList("Quantity", list, "", new { onchange = "$(this.form).submit()" })
+                    @Html.Hidden("ProductId", item.Product.Id)
+                </form>
+            </td>
+            <td>@subtotal</td>
+        </tr>
+    }
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="bold">@count</td>
+        <td class="bold">@total</td>
+    </tr>
+</table>
+
+<p style="color: red">
+    Minimum Order Amount = <b>RM 2.00</b>
+</p>
+
+@* Disable button if shopping cart empty OR not member OR total < 2.00 *@
+@{
+    var disabled = Model.Count() == 0 || !User.IsInRole("Member") || total < 2m;
+}
+
+<button data-post="/Product/Checkout" disabled="@disabled">Checkout</button>
+
+@* Show message if not member *@
+@if (!User.IsInRole("Member"))
+{
+    <p>
+        <a href="/Account/Login?returnURL=/Product/ShoppingCart">Login</a>
+        with member account to proceed checkout
+    </p>
+}

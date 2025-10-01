@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Chart | Product Ranking for Last 30 Days";
+}
+
+@section head {
+    <style>
+        td img {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #999;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+    </style>
+}
+
+<h2>Products Ranking By Sales</h2>
+
+<table class="table">
+    <tr>
+        <th>Ranking</th>
+        <th>Product</th>
+        <th>Sales</th>
+    </tr>
+    @{
+        int salesRanking = 0;
+    }
+    @foreach (var item in ViewBag.TopSales)
+    {
+        <tr>
+            <td>@(++salesRanking)</td>
+            <td>
+                <img src="/products/@item.Product.PhotoURL" alt="@item.Product.Name">
+                @item.Product.Id - @item.Product.Name
+            </td>
+            <td>@item.Sales.ToString("0.00")</td>
+        </tr>
+    }
+</table>
+
+<h2>Products Ranking By Quantity Sold</h2>
+
+<table class="table">
+    <tr>
+        <th>Ranking</th>
+        <th>Product</th>
+        <th>Quantity Sold</th>
+    </tr>
+    @{
+        int quantityRanking = 0;
+    }
+    @foreach (var item in ViewBag.TopQuantity)
+    {
+        <tr>
+            <td>@(++quantityRanking)</td>
+            <td>
+                <img src="/products/@item.Product.PhotoURL" alt="@item.Product.Name">
+                @item.Product.Id - @item.Product.Name
+            </td>
+            <td>@item.Quantity</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Chart | Sales Report for Active Sales Days";
+}
+
+<form id="dailySalesForm" method="get" action="/Chart/Data3">
+    <label for="year">Select Year:</label>
+    <select id="year" name="year"></select>
+    <button type="submit">Get Daily Sales Data</button>
+</form>
+
+<div id="dailyChart" style="width: 800px; height: 400px"></div>
+
+@section foot {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(initDailySalesChart);
+
+        let dailyDt, dailyOpt, dailyCht;
+
+        function initDailySalesChart() {
+            dailyDt = new google.visualization.DataTable();
+            dailyDt.addColumn('string', 'Date');
+            dailyDt.addColumn('number', 'Sales');
+
+            const style = { bold: true, italic: false, fontSize: 20, color: 'crimson' };
+
+            dailyOpt = {
+                title: 'Sales Report for Active Sales Days',
+                fontName: 'Roboto',
+                fontSize: 16,
+                titleTextStyle: { fontSize: 20 },
+                chartArea: { width: '85%', height: '70%', top: 60, left: 100 },
+                legend: { position: 'bottom' },
+                hAxis: { title: 'Date', titleTextStyle: style },
+                vAxis: {
+                    title: 'Sales (RM)',
+                    titleTextStyle: style,
+                    minValue: 0  
+                },
+                animation: { duration: 500, startup: true },
+                colors: ['crimson']
+            };
+
+            dailyCht = new google.visualization.LineChart(document.getElementById('dailyChart'));
+
+            fetch('/Chart/YearRange')
+                .then(response => response.json())
+                .then(data => {
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '';
+                    if (data.length > 0) {
+                        const currentYear = new Date().getFullYear();
+
+                        data.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+
+                            if (year == currentYear) {
+                                option.selected = true;
+                            }
+
+                            yearSelect.appendChild(option);
+                        });
+
+                        fetchDataAndRenderChart(currentYear); 
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No available years';
+                        yearSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching years:', error));
+
+            document.getElementById('dailySalesForm').onsubmit = function (event) {
+                event.preventDefault(); 
+
+                const year = document.getElementById('year').value;
+                if (year) {
+                    fetchDataAndRenderChart(year);
+                } else {
+                    alert('Please select a valid year.');
+                }
+            };
+        }
+
+        function fetchDataAndRenderChart(year) {
+            fetch(`/Chart/Data3?year=${year}`)
+                .then(response => response.json())
+                .then(data => {
+                    dailyDt.removeRows(0, dailyDt.getNumberOfRows()); 
+
+                    const formattedData = data.map(item => [formatDate(item[0]), item[1]]);
+                    dailyDt.addRows(formattedData);
+
+                    new google.visualization
+                        .NumberFormat({ pattern: 'RM #,##0.00' })
+                        .format(dailyDt, 1);
+
+                    dailyCht.draw(dailyDt, dailyOpt); 
+                })
+                .catch(error => console.error('Error fetching daily sales data:', error));
+        }
+        function formatDate(dateStr) {
+            const day = dateStr.substr(8, 2);
+            const month = dateStr.substr(5, 2);
+            return `${day}/${month}`;
+        }
+    </script>
+}

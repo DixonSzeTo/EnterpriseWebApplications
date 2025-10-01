@@ -1,0 +1,40 @@
+﻿@model UpdateMemberVM
+
+@{
+    ViewBag.Title = "Admin | Update Member";
+}
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="Id"></label>
+    <b>@Model.Id</b>
+    <br>
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" autofocus>
+    <span asp-validation-for="Email"></span>
+
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" >
+    <span asp-validation-for="Name"></span>
+
+    <label asp-for="Address"></label>
+    <input asp-for="Address">
+    <span asp-validation-for="Address"></span>
+
+
+    <section>
+        <button>Update</button>
+        <button type="submit" name="action" value="back">Back</button>
+    </section>
+</form>
+
+@section foot {
+    <script>
+
+        $.validator.setDefaults({ ignore: '' });
+       
+    </script>
+}

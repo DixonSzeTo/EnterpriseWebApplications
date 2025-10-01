@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Home | Chat";
+}
+
+@section head {
+    <style>
+        main {
+            display: grid;
+            grid: auto 1fr auto / auto;
+            overflow: auto;
+        }
+
+        #chat {
+            background: #ccc;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 5px;
+            padding: 5px;
+            place-items: start;
+            width: 80%; 
+            margin: 0 auto; 
+        }
+
+        form {
+            margin-top: 5px;
+            display: flex;
+            width: 81%; 
+            margin: 0 auto;
+        }
+
+
+        #text {
+            flex: 1;
+            padding: 5px;
+        }
+
+        #chat > div {
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px;
+            word-break: break-all;
+            background: #fff;
+            margin-left: 50px;
+        }
+
+        #chat > div.me {
+            background: lightgreen;
+            margin-left: 0;
+        }
+    </style>
+}
+
+<div id="chat"></div>
+
+<form>
+    <input id="text" autofocus autocomplete="off">
+    <button>Send</button>
+</form>
+
+@section foot {
+    <script src="/js/signalr.min.js"></script>
+    <script>
+        let name = '@Html.Raw(ViewBag.Name?.Replace("'", "\\'") ?? "null")';
+
+        const con = new signalR.HubConnectionBuilder()
+            .withUrl('/hub')
+            .build();
+
+        con.on('ReceiveText', receiveText);
+        con.on('Initialize', initialize);
+        con.start().then(main);
+
+        function receiveText(n, t) {
+            const c = name === n ? 'me' : '';
+            $('#chat').prepend(`<div class="${c}"><b>${n}:</b> ${t}</div>`);
+        }
+
+        function initialize(list) {
+            for (const m of list) {
+                receiveText(m.name, m.text);
+            }
+        }
+
+        function main() {
+            // Check if name is not set
+            if (!name || name === 'null') {
+                name = prompt('Enter your name:')?.trim() || 'Anonymous'; 
+            }
+
+            $('#text').prop('placeholder', name); 
+
+            $('form').submit(e => {
+                e.preventDefault();
+                const text = $('#text').val().trim();
+                if (text) {
+                    con.invoke('SendText', name, text);
+                }
+                $('#text').val('').focus();
+            });
+        }
+    </script>
+}
